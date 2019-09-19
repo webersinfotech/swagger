@@ -1,0 +1,742 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "High-grip API",
+        "version": "1.0",
+        "contact": [{
+            "name": "Rushabh Shah",
+            "email": "webersinfotech@gmail.com",
+            "phone": "+91-7990089984"
+        }, {
+            "name": "Dhawal",
+            "email": "Dhawal@gmail.com",
+            "phone": "+91-9428866192"
+        }]
+    },
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "v1/auth/login": {
+            "post": {
+                "summary": "Login",
+                "description": "Login",
+                "operationId": "login",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Login user",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/data/login"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "User logged in successfully",
+                        "schema": {
+                            "$ref": "#/responses/login"
+                        }
+                    },
+                    "400": {
+                        "description": "Login Failed",
+                        "schema":{
+                            "$ref": "#/responses/loginFailed"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid API key",
+                        "schema":{
+                            "$ref": "#/responses/invalidApikey"
+                        }
+                    }
+                }
+            }
+        },
+        "v1/auth/signup": {
+            "post": {
+                "summary": "Signup",
+                "description": "Signup",
+                "operationId": "signup",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Crate new user",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/data/signup"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "User signed up successfully",
+                        "schema": {
+                            "$ref": "#/responses/signup"
+                        }
+                    },
+                    "400": {
+                        "description": "Signup Failed",
+                        "schema":{
+                            "$ref": "#/responses/signupFailed"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid API key",
+                        "schema":{
+                            "$ref": "#/responses/invalidApikey"
+                        }
+                    }
+                }
+            }
+        },
+        "v1/auth/forgot_password": {
+            "post": {
+                "summary": "Forgot Password",
+                "description": "Forgot Password",
+                "operationId": "forgotPassword",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Forgot password",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/data/forgotPassword"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Forgot password mail sent",
+                        "schema": {
+                            "$ref": "#/responses/forgotPassword"
+                        }
+                    },
+                    "400": {
+                        "description": "E-mail not exist",
+                        "schema":{
+                            "$ref": "#/responses/failedEmailNotExist"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid API key",
+                        "schema":{
+                            "$ref": "#/responses/invalidApikey"
+                        }
+                    }
+                }
+            }
+        },
+        "v1/auth/change_password": {
+            "put": {
+                "summary": "Change Password",
+                "description": "Change Password",
+                "operationId": "changePassword",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Change existing password",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/data/changePassword"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Password changed successfully",
+                        "schema": {
+                            "$ref": "#/responses/passwordChanged"
+                        }
+                    },
+                    "400": {
+                        "description": "Old password incorrect",
+                        "schema":{
+                            "$ref": "#/responses/invalidPassword"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid API key",
+                        "schema":{
+                            "$ref": "#/responses/invalidApikey"
+                        }
+                    }
+                }
+            }
+        },
+        "v1/auth/check_email": {
+            "post": {
+                "summary": "Check whether E-mail already registered or not",
+                "description": "Check E-mail",
+                "operationId": "checkEmail",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Check given e-mail address exist or not in DB",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/data/checkEmail"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "E-mail address not registered",
+                        "schema": {
+                            "$ref": "#/responses/successEmailNotExist"
+                        }
+                    },
+                    "400": {
+                        "description": "E-mail address already registered",
+                        "schema":{
+                            "$ref": "#/responses/failedEmailNotExist"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid API key",
+                        "schema":{
+                            "$ref": "#/responses/invalidApikey"
+                        }
+                    }
+                }
+            }
+        },
+        "v1/auth/check_mobile": {
+            "post": {
+                "summary": "Check whether mobile already registered or not",
+                "description": "Check Mobile",
+                "operationId": "checkMobile",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "in": "body",
+                    "name": "body",
+                    "description": "Check given mobile number exist or not in DB",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/data/checkMobile"
+                    }
+                }],
+                "responses": {
+                    "200": {
+                        "description": "Mobile number not registered",
+                        "schema": {
+                            "$ref": "#/responses/mobileNotExist"
+                        }
+                    },
+                    "400": {
+                        "description": "Mobile number already registered",
+                        "schema":{
+                            "$ref": "#/responses/mobileExist"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid API key",
+                        "schema":{
+                            "$ref": "#/responses/invalidApikey"
+                        }
+                    }
+                }
+            }
+        },
+        "v1/brands/{cityId}": {
+            "get": {
+                "summary": "Get brands in specific city",
+                "description": "Get brands in specific city",
+                "operationId": "getBrandsByCityId",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [{
+                    "name": "cityId",
+                    "in": "path",
+                    "description": "ID of city to fetch existing brands in specific city",
+                    "required": true,
+                    "type": "integer",
+                    "format": "int64"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "successfully fetched brand",
+                        "schema": {
+                            "$ref": "#/responses/brands"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid city ID",
+                        "schema":{
+                            "$ref": "#/responses/invalidCityId"
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid API key",
+                        "schema":{
+                            "$ref": "#/responses/invalidApikey"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "responses": {
+        "login": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "response": {
+                    "type": "string",
+                    "example": "User logged in successfully"
+                }
+            }
+        },
+        "loginFailed": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 400
+                },
+                "response": {
+                    "type": "string",
+                    "example": "Login Failed"
+                }
+            }
+        },
+        "signup": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "response": {
+                    "type": "string",
+                    "example": "User signed up successfully"
+                }
+            }
+        },
+        "signupFailed": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 400
+                },
+                "response": {
+                    "type": "string",
+                    "example": "Signup Failed"
+                }
+            }
+        },
+        "forgotPassword": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "response": {
+                    "type": "string",
+                    "example": "Forgot password mail sent"
+                }
+            }
+        },
+        "passwordChanged": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "response": {
+                    "type": "string",
+                    "example": "Password changed successfully"
+                }
+            }
+        },
+        "invalidPassword": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 400
+                },
+                "response": {
+                    "type": "Old password incorrect",
+                    "example": "Example"
+                }
+            }
+        },
+        "successEmailNotExist": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "response": {
+                    "type": "E-mail address not registered",
+                    "example": "Example"
+                }
+            }
+        },
+        "failedEmailNotExist": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 400
+                },
+                "response": {
+                    "type": "E-mail not exist",
+                    "example": "Example"
+                }
+            }
+        },
+        "mobileNotExist": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "response": {
+                    "type": "string",
+                    "example": "Mobile number not registered"
+                }
+            }
+        },
+        "mobileExist": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 400
+                },
+                "response": {
+                    "type": "string",
+                    "example": "Mobile number already registered"
+                }
+            }
+        },
+        "brands": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "response": {
+                    "type": "string",
+                    "example": "Brand fetched succesfully"
+                },
+                "data": {
+                    "type": "array",
+                    "example": [
+                        "brand"
+                    ]
+                }
+            }
+        },
+        "invalidCityId": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 400
+                },
+                "response": {
+                    "type": "string",
+                    "example": "Invalid City ID"
+                }
+            }
+        },
+        "invalidApikey": {
+            "type": "object",
+            "properties": {
+                "http_status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 200
+                },
+                "status": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 400
+                },
+                "response": {
+                    "type": "string",
+                    "example": "Authorization failed"
+                }
+            }
+        }
+    },
+    "data": {
+        "login": {
+            "type": "object",
+            "required": [
+                "email", 
+                "password"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "webersinfotech@gmail.com"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "12345678"
+                }
+            }
+        },
+        "signup": {
+            "type": "object",
+            "required": [
+                "cmp_name",
+                "address",
+                "city",
+                "state",
+                "pin_code",
+                "contact_person",
+                "landline_no",
+                "mobile_1",
+                "email",
+                "brand",
+                "password"
+            ],
+            "properties": {
+                "cmp_name": {
+                    "type": "string",
+                    "example": "Webers Infotech"
+                },
+                "address": {
+                    "type": "string",
+                    "example": "B/1 Rajasthan Flat"
+                },
+                "city": {
+                    "type": "string",
+                    "example": "Ahmedabad"
+                },
+                "state": {
+                    "type": "string",
+                    "example": "Gujarat"
+                },
+                "pin_code": {
+                    "type": "string",
+                    "example": "380005"
+                },
+                "gst_no": {
+                    "type": "string",
+                    "example": "123456789"
+                },
+                "contact_person": {
+                    "type": "string",
+                    "example": "Rushabh Shah"
+                },
+                "landline_no": {
+                    "type": "string",
+                    "example": "07927570040"
+                },
+                "mobile_1": {
+                    "type": "string",
+                    "example": "7990089984"
+                },
+                "mobile_2": {
+                    "type": "string",
+                    "example": "7990089984"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "webersinfotech@gmail.com"
+                },
+                "website": {
+                    "type": "string",
+                    "example": "www.webersinfotech.com"
+                },
+                "brand": {
+                    "type": "string",
+                    "example": "tejas"
+                },
+                "reference": {
+                    "type": "string",
+                    "example": "Rushabh Shah"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "11999966"
+                },
+                "confirm_password": {
+                    "type": "string",
+                    "example": "11999966"
+                }
+            }
+        },
+        "forgotPassword": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "webersinfotech@gmail.com"
+                }
+            }
+        },
+        "changePassword": {
+            "type": "object",
+            "required": [
+                "old_password",
+                "new_password"
+            ],
+            "properties": {
+                "old_password": {
+                    "type": "string",
+                    "example": "12345678"
+                },
+                "new_password": {
+                    "type": "string",
+                    "example": "12345679"
+                }
+            }
+        },
+        "checkEmail": {
+            "type": "object",
+            "required": [
+                "email"
+            ],
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "example": "webersinfotech@gmail.com"
+                }
+            }
+        },
+        "checkMobile": {
+            "type": "object",
+            "required": [
+                "mobile"
+            ],
+            "properties": {
+                "mobile": {
+                    "type": "string",
+                    "example": "+91-7990089984"
+                }
+            }
+        }
+    }
+}
